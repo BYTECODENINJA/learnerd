@@ -3,6 +3,7 @@ import {Almendra_SC, Lexend_Deca, Onest} from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import Navbar from "@/components/Navbar";
+import { ClerkProvider } from "@clerk/nextjs";
 
 
 const Lexend = Lexend_Deca({
@@ -37,13 +38,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="en"
-      className={`${Lexend.variable} ${Onestfont.variable} ${AlmendraSC.variable} relative font-sans antialiased`}
-    >
-      <body className="min-h-full flex flex-col">
-      <Navbar/>
-      {children}</body>
-    </html>
+    <ClerkProvider>
+      <html
+        lang="en"
+        className={`${Lexend.variable} ${Onestfont.variable} ${AlmendraSC.variable} relative font-sans antialiased`}
+      >
+        <body className="min-h-full flex flex-col">
+            <Navbar/>
+            {children}
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }

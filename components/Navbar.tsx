@@ -1,7 +1,9 @@
 'use client'
 import Link from "next/link";
 import {usePathname} from "next/navigation";
+import { Show, SignInButton, UserButton, useUser } from "@clerk/nextjs"
 import {cn} from "@/lib/utils";
+import { Button } from "@/components/ui/button";
 
 const navLinks = [
     {label: 'Library', href: '/'},
@@ -10,6 +12,9 @@ const navLinks = [
 const Navbar = () => {
 
     const pathName = usePathname();
+    const { name} = useUser();
+    const { user } = useUser();
+
     return (
         <header className="w-full fixed z-50 bg-[#abc4e6]">
             <div className="wrapper navbar-height py-4 flex justify-between items-center">
@@ -29,6 +34,25 @@ const Navbar = () => {
                             </Link>
                         )
                     })}
+
+                    <div className="flex gap-7.5 items-center">
+                        <Show when="signed-out">
+                            <SignInButton mode="modal"/>
+                        </Show>
+                    </div>
+
+
+             <Show when="signed-in">
+                 <div className="nav-user-link">
+                     <UserButton/>
+                     {user?.firstName && (
+                         <Link href="/subscriptions" className="nav-user-name">
+                             {user.firstName}
+                         </Link>
+                     )}
+                 </div>
+
+             </Show>
                 </nav>
             </div>
         </header>
