@@ -11,14 +11,14 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="EmbeddingIndexingInfo">
-    <option name="cachedIndexableFilesCount" value="57" />
+    <option name="cachedIndexableFilesCount" value="61" />
     <option name="fileBasedEmbeddingIndicesEnabled" value="true" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="TypeScript JSX File" />
         <option value="TypeScript File" />
+        <option value="TypeScript JSX File" />
       </list>
     </option>
   </component>
@@ -120,7 +120,8 @@
       <workItem from="1774433978270" duration="319000" />
       <workItem from="1774434356063" duration="2348000" />
       <workItem from="1774772680125" duration="1022000" />
-      <workItem from="1774780055032" duration="8690000" />
+      <workItem from="1774780055032" duration="9767000" />
+      <workItem from="1774797428043" duration="725000" />
     </task>
     <servers />
   </component>
