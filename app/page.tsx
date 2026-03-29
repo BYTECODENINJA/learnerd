@@ -3,6 +3,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { HugeiconsIcon } from "@hugeicons/react";
 import { Add01Icon, ArrowRight02Icon } from "@hugeicons/core-free-icons";
+import BookCard from "@/components/BookCard";
+import { sampleBooks} from "@/lib/constants"
 
 const Page = () => {
     return (
@@ -22,7 +24,7 @@ const Page = () => {
                         <div className="space-y-4">
                             <div className="flex items-center gap-2 text-cyan-400 font-medium tracking-widest uppercase text-sm">
                                 <HugeiconsIcon icon={ArrowRight02Icon} size={16} />
-                                YOUR LIBRARY
+                                YOUR AI POWERED LIBRARY
                             </div>
                             <h1 className="text-6xl lg:text-8xl font-bold tracking-tighter leading-none">
                                 LEARN<span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-500">ERD</span>
@@ -75,6 +77,18 @@ const Page = () => {
                         </div>
                     ))}
                 </div>
+                <div className="mt-20">
+                    <Link href="/books" className="text-center text-white text-lg font-medium hover:underline">
+                        Explore your library
+                    </Link>
+                </div>
+
+                <div className="library-books-grid mt-20">
+                    {sampleBooks.map((book) => (
+                        <BookCard key={book._id} title={book.title} author={book.author} coverURL={book.coverURL} slug={book.slug} />
+                    ))}
+                </div>
+
             </div>
         </section>
     )
