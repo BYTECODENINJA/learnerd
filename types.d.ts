@@ -17,6 +17,7 @@ export interface IBook extends Document {
     author: string;
     fileURL: string;
     fileBlobKey: string;
+    persona: string;
     coverURL: string;
     coverBlobKey?: string;
     fileSize: number;

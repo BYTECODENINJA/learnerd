@@ -17,8 +17,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="TypeScript File" />
         <option value="TypeScript JSX File" />
+        <option value="TypeScript File" />
       </list>
     </option>
   </component>
@@ -59,7 +59,7 @@
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
     &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;db-setup&quot;,
     &quot;javascript.preferred.runtime.type.id&quot;: &quot;node&quot;,
     &quot;js.debugger.nextJs.config.created.client&quot;: &quot;true&quot;,
     &quot;js.debugger.nextJs.config.created.server&quot;: &quot;true&quot;,
@@ -121,7 +121,10 @@
       <workItem from="1774434356063" duration="2348000" />
       <workItem from="1774772680125" duration="1022000" />
       <workItem from="1774780055032" duration="9767000" />
-      <workItem from="1774797428043" duration="2446000" />
+      <workItem from="1774797428043" duration="3436000" />
+      <workItem from="1774848077203" duration="166000" />
+      <workItem from="1774864559089" duration="141000" />
+      <workItem from="1774871162383" duration="3060000" />
     </task>
     <servers />
   </component>
