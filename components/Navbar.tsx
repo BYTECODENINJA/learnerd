@@ -12,7 +12,6 @@ const navLinks = [
 const Navbar = () => {
 
     const pathName = usePathname();
-    const { name} = useUser();
     const { user } = useUser();
 
     return (

@@ -4,6 +4,7 @@ import "./globals.css";
 import { cn } from "@/lib/utils";
 import Navbar from "@/components/Navbar";
 import { ClerkProvider } from "@clerk/nextjs";
+import { Toaster } from "sonner";
 
 
 const Lexend = Lexend_Deca({
@@ -46,6 +47,7 @@ export default function RootLayout({
         <body className="min-h-full flex flex-col">
             <Navbar/>
             {children}
+        <Toaster/>
         </body>
       </html>
     </ClerkProvider>
