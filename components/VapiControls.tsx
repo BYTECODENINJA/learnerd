@@ -4,7 +4,7 @@ import {Mic, MicOff} from "lucide-react";
 import useVapi from "@/hooks/useVapi";
 import {IBook} from "@/types";
 import Image from "next/image";
-import Transcipt from "@/components/Transcipt";
+import Transcript from "@/components/Transcipt";
 import {toast} from "sonner";
 
 import {useRouter} from "next/navigation";

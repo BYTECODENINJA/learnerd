@@ -2,7 +2,7 @@
 
 import React, { useCallback, useRef } from 'react';
 import { useController, FieldValues } from 'react-hook-form';
-import { X } from 'lucide-react';
+import { LucideIcon, X } from 'lucide-react';
 import { FileUploadFieldProps } from '@/types';
 import { cn } from '@/lib/utils';
 import { FormItem, FormLabel, FormControl, FormMessage, useFormField } from '@/components/ui/form';
@@ -75,8 +75,8 @@ interface FileUploadContentProps {
     acceptTypes: string[];
     handleFileChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
     onRemove: (e: React.MouseEvent) => void;
-    value: any;
-    Icon: any;
+    value: File | null | undefined;
+    Icon: LucideIcon;
     placeholder: string;
     hint: string;
 }

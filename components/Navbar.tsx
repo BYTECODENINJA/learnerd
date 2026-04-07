@@ -3,7 +3,6 @@ import Link from "next/link";
 import {usePathname} from "next/navigation";
 import { Show, SignInButton, UserButton, useUser } from "@clerk/nextjs"
 import {cn} from "@/lib/utils";
-import { Button } from "@/components/ui/button";
 
 const navLinks = [
     {label: 'Library', href: '/'},

@@ -1,6 +1,5 @@
-import {model, models, Schema, Types} from 'mongoose';
+import {model, models, Schema} from 'mongoose';
 import {IBookSegment} from "@/types";
-import {Books} from "@hugeicons/core-free-icons";
 
 const BookSegmentSchema = new Schema<IBookSegment>({
     clerkId: {type: String, required: true},

@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import {Almendra_SC, Lexend_Deca, Onest} from "next/font/google";
 import "./globals.css";
-import { cn } from "@/lib/utils";
 import Navbar from "@/components/Navbar";
 import { ClerkProvider } from "@clerk/nextjs";
 import { Toaster } from "sonner";
