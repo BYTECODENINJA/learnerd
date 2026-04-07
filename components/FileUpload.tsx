@@ -1,69 +1,141 @@
-'use client'
-import React, { useCallback } from 'react'
-import { useDropzone } from 'react-dropzone'
-import { HugeiconsIcon } from '@hugeicons/react'
-import { CloudUploadIcon, Delete02Icon } from '@hugeicons/core-free-icons'
-import { cn } from '@/lib/utils'
+'use client';
 
-interface FileUploadProps {
-    onFileChange: (files: File[] | null) => void
-    accept: Record<string, string[]>
-    maxSize?: number
-    label: string
-    hint: string
-    value?: File[] | null
-}
+import React, { useCallback, useRef } from 'react';
+import { useController, FieldValues } from 'react-hook-form';
+import { LucideIcon, X } from 'lucide-react';
+import { FileUploadFieldProps } from '@/types';
+import { cn } from '@/lib/utils';
+import { FormItem, FormLabel, FormControl, FormMessage, useFormField } from '@/components/ui/form';
 
-const FileUpload = ({ onFileChange, accept, maxSize, label, hint, value }: FileUploadProps) => {
-    const onDrop = useCallback((acceptedFiles: File[]) => {
-        onFileChange(acceptedFiles)
-    }, [onFileChange])
+const FileUpload = <T extends FieldValues>({
+                                                 control,
+                                                 name,
+                                                 label,
+                                                 acceptTypes,
+                                                 disabled,
+                                                 icon: Icon,
+                                                 placeholder,
+                                                 hint,
+                                             }: FileUploadFieldProps<T>) => {
+    const {
+        field: { onChange, value },
+    } = useController({ name, control });
 
-    const { getRootProps, getInputProps, isDragActive } = useDropzone({
-        onDrop,
-        accept,
-        maxSize,
-        multiple: false
-    })
+    const inputRef = useRef<HTMLInputElement>(null);
 
-    const removeFile = (e: React.MouseEvent) => {
-        e.stopPropagation()
-        onFileChange(null)
-    }
+    const handleFileChange = useCallback(
+        (e: React.ChangeEvent<HTMLInputElement>) => {
+            const file = e.target.files?.[0];
+            if (file) {
+                onChange(file);
+            }
+        },
+        [onChange]
+    );
 
-    const hasFile = value && value.length > 0
+    const onRemove = useCallback(
+        (e: React.MouseEvent) => {
+            e.stopPropagation();
+            onChange(null);
+            if (inputRef.current) {
+                inputRef.current.value = '';
+            }
+        },
+        [onChange]
+    );
+
+    const isUploaded = !!value;
 
     return (
-        <div className="space-y-2">
-            <label className="form-label">{label}</label>
-            <div
-                {...getRootProps()}
-                className={cn(
-                    "upload-dropzone",
-                    hasFile && "upload-dropzone-uploaded",
-                    isDragActive && "border-brand border-2 border-dashed"
-                )}
-            >
-                <input {...getInputProps()} />
-                <div className="flex flex-col items-center">
-                    <HugeiconsIcon icon={CloudUploadIcon} className="upload-dropzone-icon" />
-                    <p className="upload-dropzone-text">
-                        {hasFile ? value[0].name : "Upload a file or drag and drop"}
-                    </p>
-                    <p className="upload-dropzone-hint">{hint}</p>
-                </div>
-                {hasFile && (
-                    <button
-                        type="button"
-                        onClick={removeFile}
-                        className="absolute top-2 right-2 upload-dropzone-remove"
-                    >
-                        <HugeiconsIcon icon={Delete02Icon} size={20} />
-                    </button>
-                )}
-            </div>
-        </div>
-    )
+        <FormItem className="w-full">
+            <FormLabel className="form-label">{label}</FormLabel>
+            <FormControl>
+                <FileUploadContent
+                    isUploaded={isUploaded}
+                    disabled={disabled}
+                    inputRef={inputRef}
+                    acceptTypes={acceptTypes}
+                    handleFileChange={handleFileChange}
+                    onRemove={onRemove}
+                    value={value}
+                    Icon={Icon}
+                    placeholder={placeholder}
+                    hint={hint}
+                />
+            </FormControl>
+            <FormMessage />
+        </FormItem>
+    );
+};
+
+interface FileUploadContentProps {
+    isUploaded: boolean;
+    disabled?: boolean;
+    inputRef: React.RefObject<HTMLInputElement | null>;
+    acceptTypes: string[];
+    handleFileChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    onRemove: (e: React.MouseEvent) => void;
+    value: File | null | undefined;
+    Icon: LucideIcon;
+    placeholder: string;
+    hint: string;
 }
 
-export default FileUpload
+const FileUploadContent = ({
+    isUploaded,
+    disabled,
+    inputRef,
+    acceptTypes,
+    handleFileChange,
+    onRemove,
+    value,
+    Icon,
+    placeholder,
+    hint,
+    ...props
+}: FileUploadContentProps & React.HTMLAttributes<HTMLDivElement>) => {
+    const { formItemId } = useFormField();
+
+    return (
+        <div
+            {...props}
+            className={cn(
+                'upload-dropzone border-2 border-dashed border-[#8B7355]/20',
+                isUploaded && 'upload-dropzone-uploaded',
+                props.className
+            )}
+            onClick={() => !disabled && inputRef.current?.click()}
+        >
+            <input
+                id={formItemId}
+                type="file"
+                accept={acceptTypes.join(',')}
+                className="hidden"
+                ref={inputRef}
+                onChange={handleFileChange}
+                disabled={disabled}
+            />
+
+            {isUploaded ? (
+                <div className="flex flex-col items-center relative w-full px-4">
+                    <p className="upload-dropzone-text line-clamp-1">{(value as File).name}</p>
+                    <button
+                        type="button"
+                        onClick={onRemove}
+                        className="upload-dropzone-remove mt-2"
+                    >
+                        <X className="w-5 h-5" />
+                    </button>
+                </div>
+            ) : (
+                <>
+                    <Icon className="upload-dropzone-icon" />
+                    <p className="upload-dropzone-text">{placeholder}</p>
+                    <p className="upload-dropzone-hint">{hint}</p>
+                </>
+            )}
+        </div>
+    );
+};
+
+export default FileUpload;

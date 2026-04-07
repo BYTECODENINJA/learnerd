@@ -17,6 +17,7 @@ export interface IBook extends Document {
     author: string;
     fileURL: string;
     fileBlobKey: string;
+    persona: string;
     coverURL: string;
     coverBlobKey?: string;
     fileSize: number;
@@ -114,7 +115,7 @@ export interface FileUploadFieldProps<T extends FieldValues> {
     placeholder: string;
     hint: string;
 }
-import {PLANS, PlanType} from "@/lib/subscription-constants";
+import {PlanType} from "@/lib/subscription-constants";
 
 export interface SessionCheckResult {
     allowed: boolean;
